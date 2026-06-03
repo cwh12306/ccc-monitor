@@ -4,7 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:staged": "lint-staged",
+    "commit": "git-cz",
+    "prepare": "husky",
+    "prettier": "prettier --write \"(packages|apps|demos)/**/*.@(html|js|cjs|mjs|ts|tsx|css|scss|md)\"",
+    "spellcheck": "cspell lint --dot --gitignore --color --cache --show-suggestions \"(packages|apps|demos)/**/*.@(html|js|cjs|mjs|ts|tsx|css|scss|md)\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -19,6 +38,14 @@
     "eslint-plugin-react-refresh": "0.5.2",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-prettier": "5.5.6",
-    "eslint-plugin-simple-import-sort": "13.0.0"
+    "eslint-plugin-simple-import-sort": "13.0.0",
+    "cspell": "10.0.1",
+    "cz-git": "1.13.1",
+    "commitizen": "4.3.1",
+    "fast-glob": "3.3.3",
+    "@commitlint/config-conventional": "21.0.2",
+    "@commitlint/cli": "21.0.2",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.7"
   }
 }

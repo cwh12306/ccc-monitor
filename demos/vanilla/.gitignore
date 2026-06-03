@@ -1,5 +1,4 @@
 # Logs
-.dependencygraph
 logs
 *.log
 npm-debug.log*
@@ -10,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 dist
-build
 dist-ssr
 *.local
 
@@ -24,14 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
-.cspellcache
-.eslintcache
-
-
-.turbo
-
-.devcontainer/data
-.devcontainer/postgresql_data
-.devcontainer/clickhouse_data
