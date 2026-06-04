@@ -1,4 +1,5 @@
 import { init as buInit } from '@ccc-monitor/browser-utils';
+
 import { Errors } from './integrations/errorsIntegration';
 
 const errors = new Errors();

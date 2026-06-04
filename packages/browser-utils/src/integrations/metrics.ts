@@ -1,4 +1,4 @@
-import { onCLS, onFCP, onINP, onLCP, onTTFB } from '../metrics';
+import { onCLS, onFCP, onLCP, onTTFB } from '../metrics';
 
 export const onLoad = (callback: (metric: { name: string; value: number }) => void) => {
     // 获取所有导航条目的数据

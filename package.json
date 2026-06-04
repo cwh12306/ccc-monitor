@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "lint:staged": "lint-staged",
     "commit": "git-cz",
     "prepare": "husky",

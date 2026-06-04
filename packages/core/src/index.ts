@@ -1,5 +1,4 @@
 // console.log(123);
-// const cwh = "heyi"
 
 export interface Person {
     name: string;

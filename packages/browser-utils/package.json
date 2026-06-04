@@ -10,7 +10,7 @@
         "build": "tsup"
     },
     "keywords": [],
-    "author": "Heyi",
+    "author": "",
     "license": "ISC",
     "description": "",
     "devDependencies": {

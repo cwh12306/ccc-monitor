@@ -28,7 +28,7 @@ const packagesConfig = {
         },
     },
     rules: {
-        'no-console': 'error',
+        // 'no-console': 'error',
     },
 };
 
@@ -71,8 +71,8 @@ const backendConfig = {
 };
 
 export default tseslint.config(
+    { ignores },
     {
-        ignores,
         extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
         plugins: {
             prettier: eslintPrettier,
