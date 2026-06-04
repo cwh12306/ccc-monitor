@@ -15,5 +15,8 @@
     "description": "",
     "devDependencies": {
         "tsup": "8.5.1"
+    },
+    "dependencies": {
+        "@ccc-monitor/core": "workspace:*"
     }
 }

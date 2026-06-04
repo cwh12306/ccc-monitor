@@ -1,29 +1,17 @@
-import { init as buInit } from '@ccc-monitor/browser-utils';
+import { Metrics } from '@ccc-monitor/browser-utils';
+import { type Integration, Monitoring } from '@ccc-monitor/core';
 
 import { Errors } from './integrations/errorsIntegration';
+import { BrowserTransport } from './transport';
+export function init(options: { dsn: string; integrations?: Integration[] }) {
+    const monitoring = new Monitoring(options); // 创建监控实例
 
-const errors = new Errors();
+    const transport = new BrowserTransport(options.dsn); // 创建传输层实例（browser环境）
 
-export function init() {
-    console.log('启动成功');
+    monitoring.init(transport); // 开启监控
 
-    buInit();
-    errors.init();
+    new Errors(transport).init(); // 开启异常指标采集
+    new Metrics(transport).init(); // 开启性能指标采集
 
-    // // 错误监控指标采集
-    // window.addEventListener('error', event => {
-    //     console.log('error', event)
-    // })
-
-    // // 对于异步数据指标采集
-    // window.addEventListener('unhandledrejection', event => {
-    //     console.log('unhandledrejection', event)
-    // })
-
-    // // 对于性能采集
-    // new PerformanceObserver(list => {
-    //     for (const entry of list.getEntries()) {
-    //         console.log(entry)
-    //     }
-    // }).observe({ entryTypes: ['resource', 'longtask'] })
+    return monitoring;
 }

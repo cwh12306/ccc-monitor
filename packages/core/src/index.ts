@@ -1,36 +1,39 @@
-// console.log(123);
+import { Transport } from './transport';
+export type { Transport } from './transport';
+export type { Integration } from './types';
+import { MonitoringOptions } from './types';
 
-export interface Person {
-    name: string;
-    age: number;
-}
+// 通过插件体系设计并接入
+// 初始化监控系统并接入对应的传输层协议
+export let getTransport: () => Transport | null = () => null;
 
-const person: Person = {
-    name: 'cwh',
-    age: 18,
-};
+export class Monitoring {
+    private transport: Transport | null = null; // 会在对应上报的宿主环境中进行赋值
 
-// window.onload = () => {
-//   console.log(person.name, person.age);
-// }
+    constructor(private options: MonitoringOptions) {
+        getTransport = () => this.transport;
+    }
 
-console.log(person.name, person.age);
+    init(transport: Transport) {
+        this.transport = transport; // 完成宿主的传输协议初始化
+        getTransport = () => transport;
 
-export function init() {
-    // 错误监控指标采集
-    window.addEventListener('error', event => {
-        console.log('error', event);
-    });
+        this.options.integrations?.forEach(integration => {
+            integration.init(transport);
+        });
+    }
 
-    // 对于异步数据指标采集
-    window.addEventListener('unhandledrejection', event => {
-        console.log('unhandledrejection', event);
-    });
+    reportMessage(message: string) {
+        this.transport?.send({
+            type: 'message',
+            message,
+        });
+    }
 
-    // 对于性能采集
-    new PerformanceObserver(list => {
-        for (const entry of list.getEntries()) {
-            console.log(entry);
-        }
-    }).observe({ entryTypes: ['resource', 'longtask'] });
+    reportEvent(event: unknown) {
+        this.transport?.send({
+            type: 'event',
+            event,
+        });
+    }
 }
