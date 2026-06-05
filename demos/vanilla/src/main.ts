@@ -8,7 +8,7 @@ import viteLogo from './assets/vite.svg';
 import { setupCounter } from './counter.ts';
 
 const monitor = init({
-    dsn: 'your-dsn-here',
+    dsn: 'http://localhost:3000/tracking/vanilla-demo0dsg3201',
     integrations: [],
 });
 

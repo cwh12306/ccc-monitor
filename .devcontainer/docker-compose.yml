@@ -1,0 +1,19 @@
+# 用来定义 docker compose
+# 用来编排 docker 相关服务
+version: '1'
+
+services:
+  ccc-monitor-clickhouse:
+    image: clickhouse:25.10
+    container_name: ccc-monitor-clickhouse
+    # 暴露端口
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    environment:
+      - CLICKHOUSE_USER=ccc
+      - CLICKHOUSE_PASSWORD=123456
+      - CLICKHOUSE_DB=monitor
+    # 数据同步至主机
+    volumes:
+      - ./clickhouse_data:/var/lib/clickhouse

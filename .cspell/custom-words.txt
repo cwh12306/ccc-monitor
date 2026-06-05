@@ -9,3 +9,4 @@ backgrounded
 prerenderingchange
 Performantly
 unsupporting
+clickhouse
