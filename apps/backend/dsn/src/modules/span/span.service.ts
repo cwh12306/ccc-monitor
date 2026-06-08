@@ -20,16 +20,17 @@ export class SpanService {
             info: rest,
         };
 
-        if (event_type === 'error') {
-            await this.emailService.alert({
-                to: 'devmiaomaedu@163.com',
-                subject: '错误事件',
-                params: {
-                    ...params,
-                    ...values,
-                },
-            });
-        }
+        // 发送错误邮件
+        // if (event_type === 'error') {
+        //     await this.emailService.alert({
+        //         to: 'devmiaomaedu@163.com',
+        //         subject: '错误事件',
+        //         params: {
+        //             ...params,
+        //             ...values,
+        //         },
+        //     });
+        // }
 
         // 写入数据到clickhouse
         await this.clickhouseClient.insert({

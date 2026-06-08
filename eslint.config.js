@@ -45,7 +45,7 @@ const frontendConfig = {
         'react-refresh': reactRefresh,
     },
     rules: {
-        ...reactHooks.configs.recommended.rules,
+        // ...reactHooks.configs.recommended.rules, // 对 shadcn 拉取的模版很多内容有影响，先关闭
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         'no-console': 'error',
     },

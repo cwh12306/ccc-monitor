@@ -17,3 +17,15 @@ services:
     # 数据同步至主机
     volumes:
       - ./clickhouse_data:/var/lib/clickhouse
+  ccc-monitor-postgres:
+    image: postgres:18.1
+    container_name: ccc-monitor-postgres
+    # 暴露端口
+    ports:
+      - '5432:5432' # 左边这个是服务主机的端口，右边docker容器内服务启动端口
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=monitor
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - ./postgresql_data:/var/lib/postgresql
