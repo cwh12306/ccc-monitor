@@ -12,4 +12,15 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
     },
+
+    // 本地代理 生产环境中走 caddy 代理
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://30.166.49.157:3001',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/api/, ''),
+            },
+        },
+    },
 });

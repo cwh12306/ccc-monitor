@@ -1,6 +1,6 @@
-import fg from 'fast-glob'
+import fg from 'fast-glob';
 
-const getPackages = packagePath => fg.sync('*', { cwd: packagePath, onlyDirectories: true, deep: 2 })
+const getPackages = packagePath => fg.sync('*', { cwd: packagePath, onlyDirectories: true, deep: 2 });
 
 const scopes = [
     ...getPackages('packages'),
@@ -13,7 +13,7 @@ const scopes = [
     'dev',
     'deploy',
     'other',
-]
+];
 
 // Emoji
 /** @type {import('cz-git').UserConfig} */
@@ -107,7 +107,7 @@ export default {
             },
         },
     },
-}
+};
 
 // 汉化
 // /** @type {import('cz-git').UserConfig} */

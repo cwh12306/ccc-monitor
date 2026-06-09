@@ -10,6 +10,7 @@ import { ApplicationModule } from './modules/application/application.module';
 
 @Module({
     imports: [
+        ApplicationModule,
         ConfigModule.forRoot({
             envFilePath: [`.env.${process.env.NODE_ENV}`],
         }),
@@ -23,7 +24,6 @@ import { ApplicationModule } from './modules/application/application.module';
             entities: [join(__dirname, 'entities', '*{.ts,.js}')],
             synchronize: true, // 线上环境请关闭
         }),
-        ApplicationModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -19,4 +19,13 @@ export class Application {
         enum: ['vanilla', 'react', 'vue'],
     })
     type!: 'vanilla' | 'react' | 'vue';
+
+    @Column({ nullable: true, default: () => 'CURRENT_TIMESTAMP' })
+    created_at!: Date;
+
+    @Column({
+        type: 'boolean',
+        default: false,
+    })
+    is_deleted!: boolean;
 }

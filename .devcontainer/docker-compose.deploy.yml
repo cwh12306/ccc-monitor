@@ -1,0 +1,37 @@
+# 部署的 docker 编排配置
+include:
+    - docker-compose.yml
+
+services:
+    ccc-monitor-server:
+        image: node:22-alpine
+        container_name: ccc-monitor-server
+        # 暴露端口
+        ports:
+            - '3111:3001'
+        environment:
+            - NODE_ENV=production
+        # 在 docker 容器中挂载 monitor 项目
+        volumes:
+            - ../:/app/monitor
+        # 工作目录
+        working_dir: /app/monitor/apps/backend/monitor
+        # 执行脚本
+        command: 'node dist/src/main.js'
+        # 依赖服务，一定要先启动依赖的服务，再启动本服务
+        depends_on:
+            - ccc-monitor-clickhouse
+            - ccc-monitor-postgres
+    ccc-monitor-caddy:
+        image: caddy:2.11-alpine
+        container_name: ccc-monitor-caddy
+        # 暴露端口
+        ports:
+            - '8888:5173' # 右边端口要与 Caddyfile 中前端项目代理端口一致
+            - '443:443'
+        # 挂载 caddy 配置文件 和前端产物，dist 可以通过脚本 copy 到该目录下
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+            - ./dist:/app/frontend/monitor/dist
+        depends_on:
+            - ccc-monitor-server

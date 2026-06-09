@@ -14,13 +14,20 @@
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   }
 }

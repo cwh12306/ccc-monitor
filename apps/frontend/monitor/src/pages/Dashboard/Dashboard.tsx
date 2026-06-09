@@ -1,13 +1,23 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { AppSidebar } from '@/components/app-sidebar';
 import { ChartAreaInteractive } from '@/components/chart-area-interactive';
-// import { DataTable } from '@/components/data-table';
 import { SectionCards } from '@/components/section-cards';
 import { SiteHeader } from '@/components/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
-// import data from "./app/dashboard/data.json"
-
 export default function DashboardPage() {
+    const { data, refetch } = useQuery({
+        queryKey: ['application', 'list'],
+        queryFn: async () => {
+            const res = await fetch('/api/application', {
+                method: 'GET',
+            });
+            return res.json();
+        },
+    });
+    console.log('🚀 ~ DashboardPage ~ data:', data, refetch);
+
     return (
         <SidebarProvider
             style={
@@ -27,7 +37,6 @@ export default function DashboardPage() {
                             <div className="px-4 lg:px-6">
                                 <ChartAreaInteractive />
                             </div>
-                            {/* <DataTable data={data} /> */}
                         </div>
                     </div>
                 </div>

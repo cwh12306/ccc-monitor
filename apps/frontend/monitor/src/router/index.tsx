@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
 import Dashboard from '@/views/Dashboard';
 import Login from '@/views/Login';
@@ -15,11 +15,15 @@ export const router = createBrowserRouter([
         ),
         children: [
             {
-                path: '/dashboard',
+                index: true,
+                element: <Navigate to="/dashboard" replace />,
+            },
+            {
+                path: 'dashboard',
                 element: <Dashboard />,
             },
             {
-                path: '/login',
+                path: 'login',
                 element: <Login />,
             },
         ],

@@ -8,7 +8,7 @@ import viteLogo from './assets/vite.svg';
 import { setupCounter } from './counter.ts';
 
 const monitor = init({
-    dsn: 'http://localhost:3000/tracking/vanilla-demo0dsg3201',
+    dsn: 'http://30.166.49.157:3000/tracking/vanilla-demo0dsg3201',
     integrations: [],
 });
 
@@ -74,8 +74,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
 
 // promise 错误
-new Promise((resolve, reject) => {
+new Promise((_, reject) => {
     reject('promise error');
 });
 
-undefinedFunction();
+// undefinedFunction();
