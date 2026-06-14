@@ -11,8 +11,8 @@ services:
       - '8123:8123'
       - '9000:9000'
     environment:
-      - CLICKHOUSE_USER=ccc
-      - CLICKHOUSE_PASSWORD=123456
+      - CLICKHOUSE_USER=${CLICKHOUSE_USERNAME}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
       - CLICKHOUSE_DB=monitor
     # 数据同步至主机
     volumes:
@@ -24,8 +24,8 @@ services:
     ports:
       - '5432:5432' # 左边这个是服务主机的端口，右边docker容器内服务启动端口
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=monitor
-      - POSTGRES_PASSWORD=123456
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./postgresql_data:/var/lib/postgresql

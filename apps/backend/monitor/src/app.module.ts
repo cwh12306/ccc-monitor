@@ -7,12 +7,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ApplicationModule } from './modules/application/application.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
     imports: [
         ApplicationModule,
+        AuthModule,
+        UsersModule,
         ConfigModule.forRoot({
-            envFilePath: [`.env.${process.env.NODE_ENV}`],
+            envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
         }),
         TypeOrmModule.forRoot({
             type: 'postgres',

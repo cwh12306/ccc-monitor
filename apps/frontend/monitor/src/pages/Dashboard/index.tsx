@@ -7,7 +7,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export default function DashboardPage() {
-    const { data, refetch } = useQuery({
+    useQuery({
         queryKey: ['application', 'list'],
         queryFn: async () => {
             const res = await fetch('/api/application', {
@@ -16,7 +16,6 @@ export default function DashboardPage() {
             return res.json();
         },
     });
-    console.log('🚀 ~ DashboardPage ~ data:', data, refetch);
 
     return (
         <SidebarProvider

@@ -1,15 +1,37 @@
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { useLogin } from '@/hooks/useAccount';
 import { cn } from '@/lib/utils';
 
+type LoginFormValues = {
+    username: string;
+    password: string;
+};
+
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+    const navigate = useNavigate();
+
+    const { mutate: loginMutation } = useLogin();
+
+    const { register, handleSubmit } = useForm<LoginFormValues>();
+
+    const onSubmit = async (data: LoginFormValues) => {
+        loginMutation({
+            username: data.username,
+            password: data.password,
+        });
+    };
+
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0">
-                    <form className="p-6 md:p-8">
+                    <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
                         <FieldGroup>
                             <div className="flex flex-col items-center gap-2 text-center">
                                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -17,7 +39,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                             </div>
                             <Field>
                                 <FieldLabel htmlFor="username">Username</FieldLabel>
-                                <Input id="username" type="username" placeholder="Username" required />
+                                <Input id="username" type="username" placeholder="Username" required {...register('username')} />
                             </Field>
                             <Field>
                                 <div className="flex items-center">
@@ -26,7 +48,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                                         Forgot your password?
                                     </a>
                                 </div>
-                                <Input id="password" type="password" required />
+                                <Input id="password" type="password" required {...register('password')} />
                             </Field>
                             <Field>
                                 <Button type="submit">Login</Button>
@@ -62,7 +84,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                                 </Button>
                             </Field> */}
                             <FieldDescription className="text-center">
-                                Don&apos;t have an account? <a href="#">Sign up</a>
+                                Don&apos;t have an account? <a onClick={() => navigate('/account/register')}>Sign up</a>
                             </FieldDescription>
                         </FieldGroup>
                     </form>

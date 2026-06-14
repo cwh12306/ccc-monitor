@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
 import Dashboard from '@/views/Dashboard';
 import Login from '@/views/Login';
+import Register from '@/views/Register';
 
 import AuthRoute from './AuthRoute';
 
@@ -22,14 +23,14 @@ export const router = createBrowserRouter([
                 path: 'dashboard',
                 element: <Dashboard />,
             },
-            {
-                path: 'login',
-                element: <Login />,
-            },
         ],
     },
     {
         path: 'account/login',
         element: <Login />,
+    },
+    {
+        path: 'account/register',
+        element: <Register />,
     },
 ]);
