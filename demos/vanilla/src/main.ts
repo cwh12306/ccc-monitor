@@ -6,7 +6,17 @@ import heroImg from './assets/hero.png';
 import typescriptLogo from './assets/typescript.svg';
 import viteLogo from './assets/vite.svg';
 import { setupCounter } from './counter.ts';
-init();
+
+const monitor = init({
+    dsn: 'http://30.166.49.157:3000/tracking/vanilla-demo0dsg3201',
+    integrations: [],
+});
+
+// 手动上报自定义事件和信息
+monitor.reportEvent({
+    name: 'test',
+    value: 1,
+});
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <section id="center">
@@ -63,4 +73,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
 
-undefinedFunction();
+// promise 错误
+new Promise((_, reject) => {
+    reject('promise error');
+});
+
+// undefinedFunction();

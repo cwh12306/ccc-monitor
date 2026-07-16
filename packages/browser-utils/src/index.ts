@@ -1,7 +1,12 @@
 import { Metrics } from './integrations/metrics';
 
-const metrics = new Metrics();
-
-export function init() {
-    metrics.init();
+export function getBrowserInfo() {
+    return {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        referrer: document.referrer,
+        path: location.pathname,
+    };
 }
+
+export { Metrics };

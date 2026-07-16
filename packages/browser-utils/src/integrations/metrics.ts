@@ -1,3 +1,5 @@
+import { Transport } from '@ccc-monitor/core';
+
 import { onCLS, onFCP, onLCP, onTTFB } from '../metrics';
 
 export const onLoad = (callback: (metric: { name: string; value: number }) => void) => {
@@ -28,35 +30,19 @@ export const onLoad = (callback: (metric: { name: string; value: number }) => vo
 };
 
 export class Metrics {
-    // constructor(private transport: Transport) {}
+    constructor(private transport: Transport) {}
 
     init() {
         window.addEventListener('load', () => {
             [onCLS, onLCP, onFCP, onTTFB, onLoad].forEach(metricFn => {
                 metricFn(metric => {
-                    // this.transport.send({
-                    //     event_type: 'performance',
-                    //     type: 'webVital',
-                    //     name: metric.name,
-                    //     value: metric.value,
-                    //     path: window.location.pathname,
-                    // })
-                    console.log(
-                        `🚀 ~ Metrics ~ init ~ {
+                    this.transport.send({
                         event_type: 'performance',
                         type: 'webVital',
                         name: metric.name,
                         value: metric.value,
                         path: window.location.pathname,
-                    }:`,
-                        {
-                            event_type: 'performance',
-                            type: 'webVital',
-                            name: metric.name,
-                            value: metric.value,
-                            path: window.location.pathname,
-                        }
-                    );
+                    });
                 });
             });
         });
